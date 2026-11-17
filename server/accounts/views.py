@@ -10,7 +10,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-
+from .permissions import IsAdminRole
 
 
 
@@ -160,5 +160,31 @@ class ProfileAPIView(APIView):
                 }
             },
 
+            status=status.HTTP_200_OK
+        )
+
+
+
+
+
+# Admin Dashboard
+
+class AdminDashboardAPIView(APIView):
+
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAdminRole]
+
+    def get(self, request):
+
+        return Response(
+            {
+                "success": True,
+                "message": "Welcome to the Admin Dashboard.",
+                "admin": {
+                    "id": request.user.id,
+                    "email": request.user.email,
+                    "role": request.user.role
+                }
+            },
             status=status.HTTP_200_OK
         )
