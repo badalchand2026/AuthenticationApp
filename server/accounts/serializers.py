@@ -5,6 +5,8 @@ from .models import User
 from django.contrib.auth import authenticate
 
 
+
+# Register
 class RegisterSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(
@@ -62,7 +64,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 
-
+# Login
 class LoginSerializer(serializers.Serializer):
 
     email = serializers.EmailField()
